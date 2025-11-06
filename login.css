@@ -1,3 +1,15 @@
+
+    :root {
+      --primary: #0078d7;
+      --bg-light: #f4f6f8;
+      --card-light: #ffffff;
+      --text-light: #333;
+
+      --bg-dark: #1c1f24;
+      --card-dark: #2a2e34;
+      --text-dark: #f5f5f5;
+    }
+
 body {
       font-family: "Segoe UI", Roboto, sans-serif;
       background: var(--bg-light);
@@ -44,5 +56,6 @@ button:hover {
   font-size: 14px;
   margin-top: 10px;
 }
+
 
 
