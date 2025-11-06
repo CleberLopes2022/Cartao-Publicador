@@ -34,7 +34,7 @@
 }
 
 header .logo {
-  height: 60px;
+  height: 70px;
   width: auto;
 }
 
@@ -234,5 +234,6 @@ body[data-theme="light"] .footer {
       }
     }
   
+
 
 
