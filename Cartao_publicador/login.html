@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login com Google</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h2>Entrar com Google</h2>
+
+    <div id="g_id_onload"
+         data-client_id="957016512361-7dl381d7mj9o7399hh957k5cjctqtbbu.apps.googleusercontent.com"
+         data-auto_prompt="false">
+    </div>
+
+    <div class="g_id_signin"
+         data-type="standard"
+         data-shape="rectangular"
+         data-theme="outline"
+         data-text="signin_with"
+         data-size="large"
+         data-logo_alignment="left">
+    </div>
+  </div>
+
+  <script>
+    // ✅ Lista de e-mails autorizados
+    const emailsAutorizados = [
+      "cleberlopestj2018@gmail.com",
+      "email.exemplo@dominio.com"
+    ];
+
+    function handleCredentialResponse(response) {
+      const data = JSON.parse(atob(response.credential.split('.')[1]));
+      const emailUsuario = data.email;
+
+      // Verifica se o email está autorizado
+      if (emailsAutorizados.includes(emailUsuario)) {
+        localStorage.setItem("user", JSON.stringify(data));
+        window.location.href = "index.html";
+      } else {
+        alert("❌ Este e-mail não tem permissão para acessar esta aplicação.");
+        google.accounts.id.disableAutoSelect();
+        localStorage.removeItem("user");
+      }
+    }
+
+    window.onload = function () {
+      google.accounts.id.initialize({
+        client_id: "957016512361-7dl381d7mj9o7399hh957k5cjctqtbbu.apps.googleusercontent.com",
+        callback: handleCredentialResponse
+      });
+      google.accounts.id.renderButton(
+        document.querySelector(".g_id_signin"),
+        { theme: "outline", size: "large" }
+      );
+    };
+  </script>
+</body>
+</html>
+
