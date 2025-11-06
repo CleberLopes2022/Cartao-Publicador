@@ -1,0 +1,72 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LS Betânia logo">
+  <!-- Cores principais -->
+  <defs>
+    <style>
+      .blue { fill: #08335a; }      /* azul escuro */
+      .green { fill: #27ae60; }     /* verde */
+      .bg { fill: #ffffff; }        /* fundo (opcional) */
+      .text { fill: #08335a; font-family: "Poppins", "Helvetica Neue", Arial, sans-serif; font-weight: 700; }
+    </style>
+  </defs>
+
+  <!-- Fundo transparente (comente se quiser branco) -->
+  <rect width="100%" height="100%" fill="transparent"></rect>
+
+  <!-- Emblema circular -->
+  <g transform="translate(512,320)">
+    <!-- círculo externo -->
+    <circle cx="0" cy="0" r="220" stroke="#27ae60" stroke-width="18" fill="none"></circle>
+
+    <!-- folha / base estilizada -->
+    <path class="green" d="M-220,40 C-140,160 140,160 220,40 L220,140 C140,240 -140,240 -220,140 Z" transform="translate(0,90)"></path>
+  </g>
+
+  <!-- Grupo de pessoas estilizadas (6 silhuetas) -->
+  <g transform="translate(512,300)">
+    <!-- posição: seis pessoas em arco (x offsets) -->
+    <!-- esquerda mais distante -->
+    <!-- cada pessoa = cabeça (circle) + corpo (rounded rectangle via path) -->
+    <!-- Person 1 (mais à esquerda) -->
+    <g transform="translate(-260,120)">
+      <circle class="blue" cx="0" cy="-40" r="28"></circle>
+      <path class="blue" d="M-40,0 Q0,70 40,0 Q20,20 -20,20 Q-40,20 -40,0 Z"></path>
+    </g>
+
+    <!-- Person 2 -->
+    <g transform="translate(-140,90)">
+      <circle class="blue" cx="0" cy="-36" r="30"></circle>
+      <path class="blue" d="M-42,2 Q0,80 42,2 Q22,26 -22,26 Q-42,26 -42,2 Z"></path>
+    </g>
+
+    <!-- Person 3 -->
+    <g transform="translate(-40,70)">
+      <circle class="blue" cx="0" cy="-36" r="34"></circle>
+      <path class="blue" d="M-46,4 Q0,90 46,4 Q24,30 -24,30 Q-46,30 -46,4 Z"></path>
+    </g>
+
+    <!-- Person 4 (central direita) -->
+    <g transform="translate(60,70)">
+      <circle class="blue" cx="0" cy="-36" r="34"></circle>
+      <path class="blue" d="M-46,4 Q0,90 46,4 Q24,30 -24,30 Q-46,30 -46,4 Z"></path>
+    </g>
+
+    <!-- Person 5 -->
+    <g transform="translate(170,90)">
+      <circle class="blue" cx="0" cy="-36" r="30"></circle>
+      <path class="blue" d="M-42,2 Q0,80 42,2 Q22,26 -22,26 Q-42,26 -42,2 Z"></path>
+    </g>
+
+    <!-- Person 6 (mais à direita) -->
+    <g transform="translate(280,120)">
+      <circle class="blue" cx="0" cy="-40" r="28"></circle>
+      <path class="blue" d="M-40,0 Q0,70 40,0 Q20,20 -20,20 Q-40,20 -40,0 Z"></path>
+    </g>
+  </g>
+
+  <!-- Texto abaixo do logotipo -->
+  <g transform="translate(512,780)">
+    <text x="0" y="0" class="text" font-size="72" text-anchor="middle">LS BETÂNIA</text>
+    <text x="0" y="56" font-size="20" text-anchor="middle" fill="#666" font-family="Poppins, Arial">Congregação / Família</text>
+  </g>
+</svg>
