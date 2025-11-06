@@ -1,12 +1,10 @@
-.body {
-      font-family: "Poppins", sans-serif;
+body {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-light);
       margin: 0;
       padding: 0;
-      background: #f1f3f7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      transition: background 0.3s, color 0.3s;
     }
 
 .login-container {
@@ -46,4 +44,5 @@ button:hover {
   font-size: 14px;
   margin-top: 10px;
 }
+
 
