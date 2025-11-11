@@ -27,10 +27,9 @@
   </div>
 
   <script>
-    // ✅ Lista de e-mails autorizados
     const emailsAutorizados = [
       "cleberlopestj2018@gmail.com",
-      "tiagoeelenice@gmail.com"
+      "tiagoeelenice@gmail.com",
       "jarasilva466@gmail.com",
       "8nato8@gmail.com",
     ];
@@ -39,9 +38,12 @@
       const data = JSON.parse(atob(response.credential.split('.')[1]));
       const emailUsuario = data.email;
 
-      // Verifica se o email está autorizado
+      console.log("Usuário logado:", emailUsuario);
+
       if (emailsAutorizados.includes(emailUsuario)) {
         localStorage.setItem("user", JSON.stringify(data));
+
+        console.log("✅ Acesso autorizado! Redirecionando...");
         window.location.href = "index.html";
       } else {
         alert("❌ Este e-mail não tem permissão para acessar esta aplicação.");
@@ -55,6 +57,7 @@
         client_id: "957016512361-7dl381d7mj9o7399hh957k5cjctqtbbu.apps.googleusercontent.com",
         callback: handleCredentialResponse
       });
+
       google.accounts.id.renderButton(
         document.querySelector(".g_id_signin"),
         { theme: "outline", size: "large" }
@@ -63,9 +66,6 @@
   </script>
 </body>
 </html>
-
-
-
 
 
 
