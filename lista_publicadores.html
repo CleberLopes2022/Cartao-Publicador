@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+
+  <header>
+    <h1>Congregação Ls Betânia</h1>
+    <button class="theme-toggle" id="themeToggle" title="Alternar tema">🌙</button>
+  </header>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+
+
+        /* MENU SUPERIOR */
+        .navbar {
+            background-color: #10025a;
+            overflow: hidden;
+            padding: 5px 0;
+        }
+
+        .navbar a {
+            float: left;
+            color: white;
+            padding: 7px 10px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            background-color: #5e5adc;
+        }
+
+        /* TITULO */
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+        }
+
+        /* TABELA BONITA */
+        .table-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+            overflow-x: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+        }
+
+        thead {
+            background-color: #10025a;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        th {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MENU SUPERIOR -->
+    <div class="navbar">
+        <a href="index.html">Cartões de Publicadores</a>
+        <a href="lista_publicadores.html">Lista de Publicadores</a>
+        <a href="assistencia.html">Assistência</a>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Endereço</th>
+                    <th>Data de Nascimento</th>
+                    <th>Data de Batismo</th>
+                    <th>Telefone</th>
+                    <th>Contato de emergência</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--  Exemplo de linhas (substitua pelas 25 pessoas) -->
+                <tr>
+                    <td>Fulano da Silva</td>
+                    <td>Rua Exemplo, 123</td>
+                    <td>01/01/1990</td>
+                    <td>01/01/2025</td>
+                    <td>(31) 98855-2221</td>
+                    <td>(31) 97888-1255</td>
+                </tr>
+                <tr>
+                    <td>Maria Souza</td>
+                    <td>Av. Central, 450</td>
+                    <td>12/06/1988</td>
+                    <td>01/01/2025</td>
+                    <td>(31) 97555-1819</td>
+                    <td>(31) 97888-1255</td>
+                </tr>
+                <!-- Continue adicionando até 25 -->
+            </tbody>
+        </table>
+    </div>
+  <footer class="footer">
+    Desenvolvido por <strong>Cleber Lopes de Sousa</strong>
+  </footer>
+</body>
+</html>
