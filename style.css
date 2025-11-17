@@ -233,7 +233,38 @@ body[data-theme="light"] .footer {
         font-size: 14px;
       }
     }
-  
+        /* Barra do menu */
+        /* MENU SUPERIOR */
+        .navbar {
+            background-color: #10025a;
+            overflow: hidden;
+            padding: 5px 0;
+        }
+
+        .navbar a {
+            float: left;
+            color: white;
+            padding: 7px 10px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            background-color: #5e5adc;
+        }
+
+        /* TITULO */
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+        }
+
+        /* Conteúdo */
+        .content {
+            padding: 20px;
+        }  
+
 
 
 
