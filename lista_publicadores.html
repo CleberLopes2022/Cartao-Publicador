@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <link rel="stylesheet" href="style.css" />
 
   <header>
-    <img src="betania.svg" alt="LS Betânia" class="logo">
-    <h1> Congregação LS Betânia</h1>
+    <h1>Congregação Ls Betânia</h1>
     <button class="theme-toggle" id="themeToggle" title="Alternar tema">🌙</button>
   </header>
 
-   <!-- 🔒 Validação de login e e-mail autorizado -->
+    <div class="navbar">
+        <a href="index.html">Cartão Publicadores</a>
+        <a href="lista_publicadores.html">Lista de Publicadores</a>
+        <a href="assistencia.html">Assistência</a>
+        <a href="analise.html">Análise</a>
+    </div>
+
+    <!-- 🔒 Validação de login e e-mail autorizado -->
   <script>
     const emailsAutorizados = [
       "cleberlopestj2018@gmail.com",
@@ -74,15 +81,15 @@
 
         /* TABELA BONITA */
         .table-container {
-            width: 90%;
-            max-width: 1000px;
-            margin: 30px auto;
+            width: 100%;
+            margin: 0 auto;
             overflow-x: auto;
             background: white;
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
         }
+
 
         table {
             width: 100%;
@@ -112,12 +119,6 @@
 </head>
 <body>
 
-    <!-- MENU SUPERIOR -->
-    <div class="navbar">
-        <a href="index.html">Cartões de Publicadores</a>
-        <a href="lista_publicadores.html">Lista de Publicadores</a>
-        <a href="assistencia.html">Assistência</a>
-    </div>
 
     <div class="table-container">
         <table>
@@ -131,26 +132,39 @@
                     <th>Contato de emergência</th>
                 </tr>
             </thead>
-            <tbody>
-                <!--  Exemplo de linhas (substitua pelas 25 pessoas) -->
-                <tr>
-                    <td>Fulano da Silva</td>
-                    <td>Rua Exemplo, 123</td>
-                    <td>01/01/1990</td>
-                    <td>01/01/2025</td>
-                    <td>(31) 98855-2221</td>
-                    <td>(31) 97888-1255</td>
-                </tr>
-                <tr>
-                    <td>Maria Souza</td>
-                    <td>Av. Central, 450</td>
-                    <td>12/06/1988</td>
-                    <td>01/01/2025</td>
-                    <td>(31) 97555-1819</td>
-                    <td>(31) 97888-1255</td>
-                </tr>
-                <!-- Continue adicionando até 25 -->
-            </tbody>
+<tbody id="tabelaCorpo"></tbody>
+
+<script>
+  const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQr3zoUWXxmV_u2WKym0lY0CCshp-l_I7_-7qEXUaBtVi70F2yETc6AMyG8IcQwuXI8sVqQuJJrwBb-/pub?gid=1283651160&single=true&output=csv";
+
+  function carregarDados() {
+    Papa.parse(CSV_URL, {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const dados = results.data.slice(0, 25); // Pega os primeiros 25
+        const corpoTabela = document.getElementById("tabelaCorpo");
+        corpoTabela.innerHTML = ""; // Limpa conteúdo anterior
+
+        dados.forEach(pessoa => {
+          const linha = document.createElement("tr");
+          linha.innerHTML = `
+            <td>${pessoa.Nome}</td>
+            <td>${pessoa.Endereço}</td>
+            <td>${pessoa["Data de Nascimento"]}</td>
+            <td>${pessoa["Data de Batismo"]}</td>
+            <td>${pessoa.Telefone}</td>
+            <td>${pessoa["Contato de emergência"]}</td>
+          `;
+          corpoTabela.appendChild(linha);
+        });
+      }
+    });
+  }
+
+  window.onload = carregarDados;
+</script>
+
         </table>
     </div>
   <footer class="footer">
@@ -158,5 +172,6 @@
   </footer>
 </body>
 </html>
+
 
 
