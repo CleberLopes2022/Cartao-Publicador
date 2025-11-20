@@ -265,6 +265,34 @@ body[data-theme="light"] .footer {
             padding: 20px;
         }  
 
+button {
+  background: linear-gradient(135deg, #1ec91b, #159d13);
+  color: #ffffff;
+  padding: 4px 22px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  letter-spacing: 0.5px;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+  background: linear-gradient(135deg, #23d61f, #18b716);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+button:focus {
+  outline: 3px solid rgba(30, 200, 30, 0.6);
+  outline-offset: 3px;
+}
 
 
 
