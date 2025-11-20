@@ -1,22 +1,202 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
-</head>
 
-<body>
-    <header>
+  <header>
     <h1>Congregação Ls Betânia</h1>
     <button class="theme-toggle" id="themeToggle" title="Alternar tema">🌙</button>
   </header>
-        <div class="navbar">
+
+    <div class="navbar">
         <a href="index.html">Cartão Publicadores</a>
         <a href="lista_publicadores.html">Lista de Publicadores</a>
         <a href="assistencia.html">Assistência</a>
         <a href="analise.html">Análise</a>
     </div>
+
+    <!-- 🔒 Validação de login e e-mail autorizado -->
+  <script>
+    const emailsAutorizados = [
+      "cleberlopestj2018@gmail.com",
+      "tiagoeelenice@gmail.com",
+      "jarasilva466@gmail.com",
+      "8nato8@gmail.com"
+      // emails
+    ];
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user || !emailsAutorizados.includes(user.email)) {
+      alert("⚠️ Acesso negado. Faça login com uma conta autorizada.");
+      localStorage.removeItem("user");
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("bemvindo").textContent = `Olá, ${user.name || user.email}!`;
+    }
+
+    document.getElementById("logout").addEventListener("click", () => {
+      localStorage.removeItem("user");
+      window.location.href = "login.html";
+    });
+  </script>
+
+    <main>
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Digite o ano do arquivo..." />
+      <div id="suggestions"></div>
+    </div>
+
+    <div id="results"></div>
+  </main>
+
+   <!-- Seu código de busca e exibição dos PDFs permanece igual -->
+  <script>
+    const API_KEY = "AIzaSyCuQT44YjNU9eh76gOeodLZL9908vyl6Y4";
+    const FOLDER_ID = "16pqNF2anazId7c8Z_uhjOVEodnrUDbO1";
+
+    const searchInput = document.getElementById("search");
+    const resultsDiv = document.getElementById("results");
+    const suggestionsDiv = document.getElementById("suggestions");
+    const themeToggle = document.getElementById("themeToggle");
+    let pdfFiles = [];
+
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.body.dataset.theme = prefersDark ? "dark" : "light";
+    themeToggle.textContent = prefersDark ? "☀️" : "🌙";
+
+    themeToggle.addEventListener("click", () => {
+      const current = document.body.dataset.theme;
+      document.body.dataset.theme = current === "dark" ? "light" : "dark";
+      themeToggle.textContent = current === "dark" ? "🌙" : "☀️";
+    });
+
+    async function loadFiles() {
+      try {
+        const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType='application/pdf'&key=${API_KEY}&fields=files(id,name,webViewLink)`;
+        const res = await fetch(url);
+        const data = await res.json();
+        pdfFiles = data.files || [];
+      } catch (err) {
+        console.error("Erro ao carregar arquivos:", err);
+        resultsDiv.innerHTML = "<p class='no-results'>Erro ao conectar com o Google Drive.</p>";
+      }
+    }
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase();
+      resultsDiv.innerHTML = "";
+      suggestionsDiv.innerHTML = "";
+      if (!query) {
+        suggestionsDiv.style.display = "none";
+        return;
+      }
+
+      const filtered = pdfFiles.filter((f) =>
+        f.name.toLowerCase().includes(query)
+      );
+
+      if (filtered.length === 0) {
+        suggestionsDiv.style.display = "none";
+        return;
+      }
+
+      suggestionsDiv.style.display = "block";
+      filtered.slice(0, 10).forEach((f) => {
+        const div = document.createElement("div");
+        div.classList.add("suggestion-item");
+        div.textContent = f.name;
+        div.addEventListener("click", () => {
+          searchInput.value = f.name;
+          suggestionsDiv.style.display = "none";
+          showResults([f]);
+        });
+        suggestionsDiv.appendChild(div);
+      });
+    });
+
+    function showResults(matches) {
+      resultsDiv.innerHTML = "";
+
+      if (matches.length === 0) {
+        resultsDiv.innerHTML = "<p>Nenhum arquivo encontrado.</p>";
+        return;
+      }
+
+      matches.forEach((match) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        const previewUrl = `https://drive.google.com/file/d/${match.id}/preview`;
+
+        card.innerHTML = `
+          <iframe src="${previewUrl}" style="width: 90%; height: 550px; border: none;" loading="lazy"></iframe>
+          <div class="card-content">
+            <h3>${match.name}</h3>
+            <div class="btns">
+              <a href="${match.webViewLink}" target="_blank" class="btn">Visualizar</a>
+              <button class="btn btn-download" data-id="${match.id}" data-name="${match.name}">Baixar</button>
+            </div>
+          </div>
+        `;
+        resultsDiv.appendChild(card);
+      });
+
+      resultsDiv.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("btn-download")) {
+          const fileId = e.target.getAttribute("data-id");
+          const fileName = e.target.getAttribute("data-name");
+
+          e.target.textContent = "Baixando...";
+          e.target.disabled = true;
+
+          try {
+            const response = await fetch(
+              `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${API_KEY}`
+            );
+
+            if (!response.ok) throw new Error("Erro ao baixar o arquivo");
+
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+          } catch (err) {
+            console.error("Erro ao baixar o arquivo:", err);
+            alert("Não foi possível baixar o arquivo.");
+          } finally {
+            e.target.textContent = "Baixar";
+            e.target.disabled = false;
+          }
+        }
+      });
+    }
+
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const query = searchInput.value.toLowerCase();
+        const matches = pdfFiles.filter((f) =>
+          f.name.toLowerCase().includes(query)
+        );
+        showResults(matches);
+        suggestionsDiv.style.display = "none";
+      }
+    });
+
+    loadFiles();
+  </script>
+
+  <footer class="footer">
+    Desenvolvido por <strong>Cleber Lopes de Sousa</strong>
+  </footer>
 </body>
 </html>
