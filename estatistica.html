@@ -141,20 +141,153 @@
 
   <script>
     // EXEMPLO DE GRÁFICOS (Você pode alterar)
-    const exemploConfig = (label) => ({
-      type: 'bar',
-      data: {
-        labels: ['Jan', 'Fev', 'Mar', 'Abr'],
-        datasets: [{
-          label: label,
-          data: [12, 19, 3, 5],
-        }]
-      }
-    });
+const exemploConfig = (label) => ({
+  type: 'bar',
+  data: {
+    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+    datasets: [{
+      label: label,
+      data: [25, 28, 31, 27, 27, 28, 28, 29, 23, 27, 0],
+      backgroundColor: '#4e73df'
+    }]
+  },
+  options: {
+    plugins: {
+      legend: { display: true },
+    },
+    animation: {
+      onComplete: (animation) => {
+        const chart = animation.chart;
+        const ctx = chart.ctx;
 
-    new Chart(document.getElementById('grafico1'), exemploConfig("Dados 1"));
-    new Chart(document.getElementById('grafico2'), exemploConfig("Dados 2"));
-    new Chart(document.getElementById('grafico3'), exemploConfig("Dados 3"));
+        chart.data.datasets.forEach((dataset, i) => {
+          const meta = chart.getDatasetMeta(i);
+          
+          meta.data.forEach((bar, index) => {
+            const value = dataset.data[index];
+
+            ctx.save();
+            ctx.fillStyle = "#000";
+            ctx.font = "12px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "bottom";
+            ctx.fillText(value, bar.x, bar.y - 5);
+            ctx.restore();
+          });
+        });
+      },
+    },
+  }
+});
+
+const exemploLinhaConfig = (label) => ({
+  type: 'line',
+  data: {
+    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+    datasets: [{
+      label: label,
+      data: [29, 24, 30, 37, 27, 26, 28, 26, 29, 33, 0, 0],
+      borderColor: '#4e73df',
+      borderWidth: 3,
+      pointBackgroundColor: '#4e73df',
+      pointBorderColor: '#fff',
+      pointRadius: 5,
+      tension: 0.3
+    }]
+  },
+  options: {
+    plugins: {
+      legend: { display: true }
+    },
+    animation: {
+      onComplete: (animation) => {
+        const chart = animation.chart;
+        const ctx = chart.ctx;
+
+        chart.data.datasets.forEach((dataset, i) => {
+          const meta = chart.getDatasetMeta(i);
+
+          meta.data.forEach((point, index) => {
+            const value = dataset.data[index];
+
+            ctx.save();
+            ctx.fillStyle = "#000";
+            ctx.font = "12px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "bottom";
+            ctx.fillText(value, point.x, point.y - 8); // posição acima do ponto
+            ctx.restore();
+          });
+        });
+      }
+    },
+    elements: {
+      line: {
+        fill: false
+      }
+    }
+  }
+});
+
+const exemploPizzaConfig = (label) => ({
+  type: 'pie',
+  data: {
+    labels: ['Anciãos','Pioneiro Regular', 'S.Ministerial', 'Publicadores'],
+    datasets: [{
+      label: label,
+      data: [4, 17, 1, 5],
+      backgroundColor: [
+        '#4e73df',
+        '#1cc88a',
+        '#36b9cc',
+        '#f6c23e',
+        '#e74a3b',
+        '#858796'
+      ]
+    }]
+  },
+  options: {
+    plugins: {
+      legend: { display: true },
+    },
+    animation: {
+      onComplete: (animation) => {
+        const chart = animation.chart;
+        const ctx = chart.ctx;
+        const meta = chart.getDatasetMeta(0);
+        const dataset = chart.data.datasets[0];
+
+        meta.data.forEach((slice, index) => {
+          const value = dataset.data[index];
+          const model = slice;
+
+          const x = model.x;
+          const y = model.y;
+
+          // Pega ângulo para posicionar texto no meio da fatia
+          const angle = (model.startAngle + model.endAngle) / 2;
+          const radius = model.outerRadius * 0.7;
+
+          const tx = model.x + Math.cos(angle) * radius;
+          const ty = model.y + Math.sin(angle) * radius;
+
+          ctx.save();
+          ctx.fillStyle = "#000";
+          ctx.font = "20px Arial";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(value, tx, ty);
+          ctx.restore();
+        });
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('grafico1'), exemploLinhaConfig("Dados 2025"));
+new Chart(document.getElementById('grafico2'), exemploLinhaConfig("Dados 2025"));
+new Chart(document.getElementById('graficoPizza'), exemploPizzaConfig("Dados 2025"));
+
   </script>
   <footer class="footer">
     Desenvolvido por <strong>Cleber Lopes de Sousa</strong>
