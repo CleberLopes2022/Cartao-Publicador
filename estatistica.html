@@ -72,6 +72,13 @@
       margin-bottom: 10px;
       font-weight: 500;
     }
+
+  #graficoPizza {
+  display: block;
+  margin: 0 auto;
+  width: 290px !important;
+  height: 290px !important;
+  }
   </style>
 
   <!-- OPCIONAL: Ativar Chart.js -->
@@ -123,22 +130,21 @@
   <div class="charts-container">
 
     <div class="chart-box">
-      <div class="chart-title">Gráfico 1</div>
+      <div class="chart-title">Média da Assistência final de semana</div>
       <canvas id="grafico1"></canvas>
     </div>
 
     <div class="chart-box">
-      <div class="chart-title">Gráfico 2</div>
+      <div class="chart-title">Assistência de Surdos final de semana</div>
       <canvas id="grafico2"></canvas>
     </div>
 
     <div class="chart-box">
-      <div class="chart-title">Gráfico 3</div>
-      <canvas id="grafico3"></canvas>
+      <div class="chart-title">Composição</div>
+      <canvas id="graficoPizza"></canvas>
     </div>
 
   </div>
-
   <script>
     // EXEMPLO DE GRÁFICOS (Você pode alterar)
 const exemploConfig = (label) => ({
@@ -294,3 +300,4 @@ new Chart(document.getElementById('graficoPizza'), exemploPizzaConfig("Dados 202
   </footer>
 </body>
 </html>
+
