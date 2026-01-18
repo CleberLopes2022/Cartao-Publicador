@@ -162,7 +162,17 @@ const exemploLinhaConfig1 = (label) => ({
       pointBorderColor: '#fff',
       pointRadius: 5,
       tension: 0.3
-    }]
+    },
+    {
+        label: 'Série Vermelha',
+        data: [6, 6, 7, 8, 7, 7, 7, 7, 7, 7, 7, 6],
+        borderColor: '#e74a3b',
+        borderWidth: 3,
+        pointBackgroundColor: '#e74a3b',
+        pointBorderColor: '#fff',
+        pointRadius: 5,
+        tension: 0.3
+      }]
   },
   options: {
     plugins: {
@@ -312,6 +322,7 @@ new Chart(document.getElementById('graficoPizza'), exemploPizzaConfig("Dados 202
   </footer>
 </body>
 </html>
+
 
 
 
