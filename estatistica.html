@@ -164,8 +164,8 @@ const exemploLinhaConfig1 = (label) => ({
       tension: 0.3
     },
     {
-        label: 'Série Vermelha',
-        data: [6, 6, 7, 8, 7, 7, 7, 7, 7, 7, 7, 6],
+        label: 'Assistência de Surdos',
+        data: [5,5,6,5,6,7,6,6,7,6,7],
         borderColor: '#e74a3b',
         borderWidth: 3,
         pointBackgroundColor: '#e74a3b',
@@ -221,7 +221,17 @@ const exemploLinhaConfig = (label) => ({
       pointBorderColor: '#fff',
       pointRadius: 5,
       tension: 0.3
-    }]
+    },
+              {
+        label: 'Assistência de Surdos',
+        data: [6, 6, 7, 8, 7, 7, 7, 7, 7, 7, 7, 6],
+        borderColor: '#e74a3b',
+        borderWidth: 3,
+        pointBackgroundColor: '#e74a3b',
+        pointBorderColor: '#fff',
+        pointRadius: 5,
+        tension: 0.3
+      }]
   },
   options: {
     plugins: {
@@ -312,8 +322,8 @@ const exemploPizzaConfig = (label) => ({
   }
 });
 
-new Chart(document.getElementById('grafico1'), exemploLinhaConfig("Dados 2025"));
-new Chart(document.getElementById('grafico2'), exemploLinhaConfig1("Dados 2025"));
+new Chart(document.getElementById('grafico1'), exemploLinhaConfig("Assistência Geral 2025"));
+new Chart(document.getElementById('grafico2'), exemploLinhaConfig1("Assistência Geral 2025"));
 new Chart(document.getElementById('graficoPizza'), exemploPizzaConfig("Dados 2025"));
 
   </script>
@@ -322,6 +332,7 @@ new Chart(document.getElementById('graficoPizza'), exemploPizzaConfig("Dados 202
   </footer>
 </body>
 </html>
+
 
 
 
