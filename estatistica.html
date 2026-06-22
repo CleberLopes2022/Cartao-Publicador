@@ -121,7 +121,7 @@
 
     <div class="metric-card">
       <div class="metric-title">Pioneiros Regulares</div>
-      <div class="metric-value" id="supervisores">17</div>
+      <div class="metric-value" id="supervisores">16</div>
     </div>
 
   </div>
@@ -155,7 +155,7 @@ const exemploLinhaConfig1 = (label) => ({
     labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
     datasets: [{
       label: label,
-      data: [25, 28, 31, 27, 27, 28, 28, 29, 23, 27, 24, 26],
+      data: [25, 27, 27, 29, 26, 0, 0, 0, 0, 0, 0, 0],
       borderColor: '#4e73df',
       borderWidth: 3,
       pointBackgroundColor: '#4e73df',
@@ -165,7 +165,7 @@ const exemploLinhaConfig1 = (label) => ({
     },
     {
         label: 'Assistência de Surdos',
-        data: [5,5,6,5,6,7,6,6,7,6,7,7],
+        data: [5,7,7,6,6,0,0,0,0,0,0,0],
         borderColor: '#e74a3b',
         borderWidth: 3,
         pointBackgroundColor: '#e74a3b',
@@ -214,7 +214,7 @@ const exemploLinhaConfig = (label) => ({
     labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
     datasets: [{
       label: label,
-      data: [29, 24, 30, 37, 27, 26, 28, 26, 29, 33, 25, 28],
+      data: [27, 27, 28, 25, 25, 0, 0, 0, 0, 0, 0, 0],
       borderColor: '#4e73df',
       borderWidth: 3,
       pointBackgroundColor: '#4e73df',
@@ -224,7 +224,7 @@ const exemploLinhaConfig = (label) => ({
     },
               {
         label: 'Assistência de Surdos',
-        data: [6, 6, 7, 8, 7, 7, 7, 7, 7, 7, 7, 6],
+        data: [6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0],
         borderColor: '#e74a3b',
         borderWidth: 3,
         pointBackgroundColor: '#e74a3b',
@@ -322,9 +322,9 @@ const exemploPizzaConfig = (label) => ({
   }
 });
 
-new Chart(document.getElementById('grafico1'), exemploLinhaConfig("Assistência Geral 2025"));
-new Chart(document.getElementById('grafico2'), exemploLinhaConfig1("Assistência Geral 2025"));
-new Chart(document.getElementById('graficoPizza'), exemploPizzaConfig("Dados 2025"));
+new Chart(document.getElementById('grafico1'), exemploLinhaConfig("Assistência Geral 2026"));
+new Chart(document.getElementById('grafico2'), exemploLinhaConfig1("Assistência Geral 2026"));
+new Chart(document.getElementById('graficoPizza'), exemploPizzaConfig("Dados 2026"));
 
   </script>
   <footer class="footer">
